@@ -15,10 +15,11 @@ class NoteForm extends Component {
     return (
       <div className="NoteForm">
         <div className="form-actions">
-          <button type="button">
-            <i className="fa fa-trash-o">
-              onChange={this.deleteNote}
-            </i>
+          <button
+            type="button"
+            onClick={this.props.removeCurrentNote}
+          >
+            <i className="fa fa-trash-o"></i>
           </button>
         </div>
         <form>

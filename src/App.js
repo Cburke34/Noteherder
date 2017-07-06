@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import base from './base.js'
-
+import base from './base'
 
 import './App.css'
 import Main from './Main'
@@ -15,6 +14,16 @@ class App extends Component {
     }
   }
 
+  componentDidMount = () => {
+    base.syncState(
+      'notes',
+      {
+        context: this,  // what object the state is on
+        state: 'notes', // which property to sync
+      }
+    )
+  }
+
   blankNote = () => {
     return {
       id: null,
@@ -22,17 +31,6 @@ class App extends Component {
       body: '',
     }
   }
-
-componentDidMount = () => {
-  base.syncState(
-    'notes',
-    {
-      context: this,
-      state: 'notes',
-
-    }
-  )
-}
 
   setCurrentNote = (note) => {
     this.setState({ currentNote: note })
