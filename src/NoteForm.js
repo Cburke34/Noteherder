@@ -3,24 +3,22 @@ import React, { Component } from 'react'
 import './NoteForm.css'
 
 class NoteForm extends Component {
-constructor(props){
-  super(props)
-
-  this.handleChange = this.handleChange.bind(this)
-}
-
-
-handleChange(ev) {
-
-}
-
+  handleChanges = (ev) => {
+    const note = {...this.props.currentNote}
+    note[ev.target.name] = ev.target.value
+    this.props.saveNote(note)
+  }
 
   render() {
+    const { currentNote } = this.props
+
     return (
       <div className="NoteForm">
         <div className="form-actions">
           <button type="button">
-            <i className="fa fa-trash-o"></i>
+            <i className="fa fa-trash-o">
+              onChange={this.deleteNote}
+            </i>
           </button>
         </div>
         <form>
@@ -29,21 +27,16 @@ handleChange(ev) {
               type="text"
               name="title"
               placeholder="Title your note"
-              value={this.props.currentNote.title}
+              value={currentNote.title}
+              onChange={this.handleChanges}
             />
           </p>
           
-          <textarea 
-          name="body"
-          placeholder= "type your note here"
-          value={this.props.currentNote.body}
+          <textarea
+            name="body"
+            value={currentNote.body}
+            onChange={this.handleChanges}
           ></textarea>
-         <button
-                className="success button"
-                type="submit"
-              >
-              Submit New Note
-              </button>
         </form>
       </div>
     )

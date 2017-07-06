@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import base from './base.js'
+
 
 import './App.css'
 import Main from './Main'
@@ -7,42 +9,79 @@ class App extends Component {
   constructor() {
     super()
 
-this.setCurrentNote=this.setCurrentNote.bind(this)
-
     this.state = {
-      notes: {
-        'note-1': {
-          id: 'note-1',
-          title: 'My fancy note from App',
-          body: 'This note is so fancy!',
-        },
-        'note-2': {
-          id: 'note-2',
-          title: 'Another one from App',
-          body: 'Also very fancy',
-        },
-      },
-      currentNote: {
-        id: null,
-        title: '',
-        body: '',
-      }
+      notes:  {},
+      currentNote: this.blankNote(),
     }
   }
 
-setCurrentNote = (note) => {
-this.setState({ currentNote: note })
+  blankNote = () => {
+    return {
+      id: null,
+      title: '',
+      body: '',
+    }
+  }
+
+componentDidMount = () => {
+  base.syncState(
+    'notes',
+    {
+      context: this,
+      state: 'notes',
+
+    }
+  )
 }
 
+  setCurrentNote = (note) => {
+    this.setState({ currentNote: note })
+  }
+
+  resetCurrentNote = () => {
+    this.setCurrentNote(this.blankNote())
+  }
+
+  saveNote = (note) => {
+    const notes = {...this.state.notes}
+    if (!note.id) {
+      note.id = Date.now()
+    }
+    notes[note.id] = note
+
+    this.setState({ notes })
+    this.setCurrentNote(note)
+  }
+
+  removeCurrentNote = () => {
+    const notes = {...this.state.notes}
+    notes[this.state.currentNote.id] = null
+
+    this.setState({ notes })
+    this.resetCurrentNote()
+  }
+
   render() {
+    const actions = {
+      setCurrentNote: this.setCurrentNote,
+      resetCurrentNote: this.resetCurrentNote,
+      saveNote: this.saveNote,
+      removeCurrentNote: this.removeCurrentNote,
+    }
+
+    const noteData = {
+      notes: this.state.notes,
+      currentNote: this.state.currentNote,
+    }
+
     return (
       <div className="App">
-        <Main 
-        notes={this.state.notes}
-        currentNote={this.state.currentNote}
-        setCurrentNote={this.setCurrentNote} />
+        <Main
+          {...noteData}
+          {...actions}
+        />
       </div>
-    );
+    )
   }
 }
 
