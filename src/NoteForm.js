@@ -3,6 +3,18 @@ import React, { Component } from 'react'
 import './NoteForm.css'
 
 class NoteForm extends Component {
+constructor(props){
+  super(props)
+
+  this.handleChange = this.handleChange.bind(this)
+}
+
+
+handleChange(ev) {
+
+}
+
+
   render() {
     return (
       <div className="NoteForm">
@@ -17,10 +29,21 @@ class NoteForm extends Component {
               type="text"
               name="title"
               placeholder="Title your note"
+              onSubmit= {this.handleChange}
             />
           </p>
           
-          <textarea name="body"></textarea>
+          <textarea 
+          name="body"
+          placeholder= "type your note here"
+          onChange= {this.handleChange}
+          ></textarea>
+         <button
+                className="success button"
+                type="submit"
+              >
+              Submit New Note
+              </button>
         </form>
       </div>
     )

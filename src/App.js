@@ -7,6 +7,8 @@ class App extends Component {
   constructor() {
     super()
 
+
+
     this.state = {
       notes: {
         'note-1': {
