@@ -29,14 +29,14 @@ handleChange(ev) {
               type="text"
               name="title"
               placeholder="Title your note"
-              onSubmit= {this.handleChange}
+              value={this.props.currentNote.title}
             />
           </p>
           
           <textarea 
           name="body"
           placeholder= "type your note here"
-          onChange= {this.handleChange}
+          value={this.props.currentNote.body}
           ></textarea>
          <button
                 className="success button"
