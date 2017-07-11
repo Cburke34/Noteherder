@@ -36,14 +36,3 @@
 .Sidebar a:hover img.outline {
   opacity: 0;
 }
-
-.Sidebar .SignOut {
-  position: absolute;
-  bottom: 1rem;
-}
-.Sidebar .SignOut button {
-  outline: none;
-}
-.Sidebar .SignOut button i.fa {
-  font-size: 2rem;
-}

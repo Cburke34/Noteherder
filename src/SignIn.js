@@ -1,7 +1,8 @@
 import React from 'react'
 
+
+import Header from './Header'
 import './SignIn.css'
-import quill from './quill.svg'
 import googleLogo from './google.svg'
 import { auth, googleProvider, gitProvider } from './base'
 
@@ -19,10 +20,7 @@ const SignIn = () => {
 
   return (
     <div className="SignIn">
-      <header className="Header">
-        <img src={quill} alt="" />
-        <span className="title">Noteherder</span>
-      </header>
+        <Header />
       <main>
         <h3>Hey, Nerd! You Like Notes?</h3>
         <p>You never know when you'll need to write crap down. In fact, you should probably be taking notes right now.</p>
