@@ -3,7 +3,7 @@ import React from 'react'
 import './SignIn.css'
 import quill from './quill.svg'
 import googleLogo from './google.svg'
-import { auth, googleProvider } from './base'
+import { auth, googleProvider, gitProvider } from './base'
 
 const SignIn = () => {
   const authenticate = () => {
