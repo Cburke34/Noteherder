@@ -13,8 +13,13 @@ class NoteForm extends Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    const nextId = nextProps.currentNoteId
-    const note = nextProps.notes[nextId] || this.blankNote()
+    const idFromUrl = nextProps.match.params.id
+    const note = nextProps.notes[idFromUrl] || this.blankNote()
+
+    const noteNotFound = idFromUrl && !note.id
+    if (noteNotFound && nextProps.firebaseNotesSynced) {
+      this.props.history.replace('/notes')
+    }
     
     let editorValue = this.state.editorValue
     if (editorValue.toString('html') !== note.body) {
@@ -57,7 +62,7 @@ class NoteForm extends Component {
         <div className="form-actions">
           <button
             type="button"
-            onClick={this.props.removeCurrentNote}
+            onClick={() => this.props.removeNote(this.state.note)}
           >
             <i className="fa fa-trash-o"></i>
           </button>
